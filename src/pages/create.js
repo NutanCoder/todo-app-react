@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 function CreatePage() {
   const navigate = useNavigate();
 
+  const [isButtonClicked, setIsButtonClicked] = useState(false);
   const [payload, setPayload] = useState({
     'title': '',
     'description': '',
@@ -20,6 +21,7 @@ function CreatePage() {
 
   const submitHandler = async (event) => {
     event.preventDefault();
+    setIsButtonClicked(true);
     const url = 'https://api.nstack.in/v1/todos';
     const options = {
       method: 'POST',
@@ -30,7 +32,6 @@ function CreatePage() {
     };
     const response = await fetch(url, options);
     const body = await response.json();
-    console.log(body);
     navigate('/todos');
   };
 
@@ -58,7 +59,9 @@ function CreatePage() {
               </select>
             </div>
             <div className="d-grid">
-              <button type="submit" className="btn btn-primary">Submit</button>
+              <button type="submit" className="btn btn-primary" disabled={isButtonClicked}>
+                Submit
+              </button>
             </div>
           </form>
         </div>

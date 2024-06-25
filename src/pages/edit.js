@@ -6,6 +6,8 @@ function EditPage() {
   const params = useParams();
   const todoId = params.id;
 
+  const [isButtonClicked, setisButtonClicked] = useState(false);
+
   const [payload, setPayload] = useState({
     'title': '',
     'description': '',
@@ -42,6 +44,7 @@ function EditPage() {
 
   const submitHandler = async (event) => {
     event.preventDefault();
+    setisButtonClicked(true);
     const url = `https://api.nstack.in/v1/todos/${todoId}`;
     const options = {
       method: 'PUT',
@@ -81,7 +84,9 @@ function EditPage() {
               </select>
             </div>
             <div className="d-grid">
-              <button type="submit" className="btn btn-primary">Submit</button>
+              <button type="submit" className="btn btn-primary" disabled={isButtonClicked}>
+                Submit
+              </button>
             </div>
           </form>
         </div>

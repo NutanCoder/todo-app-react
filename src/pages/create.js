@@ -1,6 +1,8 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 function CreatePage() {
+  const navigate = useNavigate();
 
   const [payload, setPayload] = useState({
     'title': '',
@@ -29,6 +31,7 @@ function CreatePage() {
     const response = await fetch(url, options);
     const body = await response.json();
     console.log(body);
+    navigate('/todos');
   };
 
   return (

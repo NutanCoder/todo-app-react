@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 function TodoList() {
 
-  const [todos, setTodos] = useState([]);
+  const [todos, setTodos] = useState(null);
 
   const fetchTodos = async () => {
     const url = 'https://api.nstack.in/v1/todos';
@@ -29,6 +29,14 @@ function TodoList() {
     fetchTodos();
   }, []);
 
+  if (todos == null) {
+    return (
+      <div className="container">
+        <h4>Loading..</h4>
+      </div>
+    );
+  }
+
   return (
     <div className="container my-2">
       <h1>TodoList</h1>
@@ -53,6 +61,10 @@ function TodoList() {
               </div>
             )
           })
+        }
+
+        {
+          todos.length == 0 ? <>No Data</> : <></>
         }
       </div>
     </div>
